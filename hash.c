@@ -23,7 +23,7 @@ void hash(char *str,unsigned long long tamanho, char *strOut){
     }
     uint32_t HashFinal[] = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19};
 
-    char HashFinalStr[65];
+    char HashFinalStr[100];
 
     // definição de tamanhos e acerto de tamanhos maiores e menores
     size_t tamanho_bit = strlen(str) * 8;
@@ -36,7 +36,7 @@ void hash(char *str,unsigned long long tamanho, char *strOut){
         adiciona_zeros = 64 + 56 - (tamanho_total % 64);
     }
 
-    uint8_t* msg_tamanho_corrigido = (uint8_t*) malloc (tamanho_total + adiciona_zeros + 8);
+    uint8_t* msg_tamanho_corrigido = (uint8_t*) malloc (tamanho_total + adiciona_zeros + 8 + 1);
 
     if(!adiciona_zeros) {exit(1);}
 
@@ -50,14 +50,13 @@ void hash(char *str,unsigned long long tamanho, char *strOut){
         msg_tamanho_corrigido[(tamanho_total + adiciona_zeros + 8) - 1 - i] = (tamanho_bit >> (8 * i)) & 0xff;
     }
 
-
     // começa processamento de blocos
     for (size_t i = 0; i < strlen(str); i += 64){
 
-        char bloco[64];
+        char bloco[100];
 
         strncpy(bloco,&str[i],sizeof(bloco)-2);
-        bloco[64] = '\0';
+        bloco[99] = '\0';
         
 
         if ((strlen(bloco) + 1) < sizeof(bloco)){
@@ -128,5 +127,10 @@ void hash(char *str,unsigned long long tamanho, char *strOut){
         strcat(HashFinalStr, temp1);
     }
     strcat(HashFinalStr,"\0");
+    free(msg_tamanho_corrigido);
     strcpy(strOut,HashFinalStr);
+
+    strcpy(HashFinalStr,"");
+    strcpy(temp1,"");
+
 }
