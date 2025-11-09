@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<title>{% block title %}Blockchain Simples{% endblock %}</title>
+<script src="https://cdn.tailwindcss.com"></script>
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css' )}}">
+    
+</head>
+<body style='overflow:auto; '>
+	<div style="margin-bottom: 10%;">
+        <ul>
+            <div class="container2" >
+             <p>Código da cadeia: {{codigo}}</p>
+            </div>
+            {% set glob={'bole':False} %}
+            {% if(validez > -1) %}
+            <div class="container2" style="background-color: rgb(197, 68, 68); color:white;">
+                <p >Blocos do {{validez}} para frente estão invalidos!</p>
+            </div>
+            {% endif %}
+            
+            {% for key, value in data.items() %}
+            {% set variavel = key|replace("Bloco","")%}
+            
+            {% if variavel|int() == validez|int() %}
+                {% set _ = glob.update({'bole':True}) %}
+            {% endif %}
+            
+            {% if glob['bole'] %}
+
+            <div class="container2" style="background-color:rgb(197, 68, 68); color:white;">
+                <p class="text-lg font-bold mb-2" style="font-size: 30px">{{key}}</p> <br>
+                {% for i, j in value.items() %}
+                <p class="text-lg font-bold mb-2">{{ i }} : {{ j }} </p> <br>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="container2" style="background-color: white">
+                <p class="text-lg font-bold mb-2" style="font-size: 30px">{{key}}</p> <br>
+                {% for i, j in value.items() %}
+                <p class="text-lg font-bold mb-2">{{ i }} : {{ j }} </p> <br>
+                {% endfor %}
+            </div>
+            {% endif %}
+                
+            
+            
+            {% endfor %}
+        
+        </ul>
+		<div class="container2">
+        <form action="#" method="POST">
+            <p >Adicionar Bloco:</p>
+            <p><input type="text" name="add" maxlength="199" pattern="[^.;]+" placeholder="Digite o proximo estágio" class="w-full p-2 rounded-md bg-gray-900 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-400 mb-4" /></p>
+            <p><input type="submit" value="Enviar" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-md transition"/></p>
+        </form>
+        </div>
+        <div style="height: 30px;"></div>
+	</div>
+  
+</body>
+</html>
+{% endblock %}

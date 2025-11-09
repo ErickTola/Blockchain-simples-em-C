@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<title>{% block title %}Blockchain Simples{% endblock %}</title>
+<script src="https://cdn.tailwindcss.com"></script>
+{% block content %}
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reciclagem do Alumínio</title>
+</head>
+<body class="bg-cover bg-center min-h-screen flex flex-col items-center justify-center" style="background-image: url('https://mudatudo.com.br/website/wp-content/uploads/2018/02/cans-2618674_1920-1280x640.jpg');">
+<div class="bg-black bg-opacity-50 absolute inset-0"></div>
+
+<main class="relative z-10 flex flex-col items-center text-white">
+<h1 class="text-4xl font-extrabold mb-10">Reciclagem do alumínio</h1>
+
+<div class="flex flex-col md:flex-row gap-8">
+    <!-- Buscar por código -->
+    <div class="bg-white text-gray-900 rounded-2xl shadow-xl p-8 w-80">
+    <h2 class="text-lg font-bold mb-2">Buscar por código de produto</h2>
+    <p class="text-sm text-gray-500 mb-4">Código Inexistente!</p><br>
+    <form action="#" method="POST">
+        <label for="codigo" class="block text-sm font-medium mb-1">Código:</label>
+        <input type="text" name="proc" pattern="[^.;]+" placeholder="Digite o código do produto" class="w-full p-2 rounded-md bg-gray-900 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 mb-4" />
+        <input type="submit" value="Enviar" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-md transition"/>
+    </form>
+    </div>
+
+    <!-- Criar novo código -->
+    <div class="bg-white text-gray-900 rounded-2xl shadow-xl p-8 w-80">
+    <h2 class="text-lg font-bold mb-2">Criar novo código de produto</h2>
+    <p class="text-sm text-gray-500 mb-4">Registre um novo produto no sistema de consulta</p>
+    <form action="#" method="POST">
+        <label for="estagio" class="block text-sm font-medium mb-1">Primeiro estágio:</label>
+        <input type="text" name="cria" pattern="[^.;]+" placeholder="Digite o primeiro estágio" class="w-full p-2 rounded-md bg-gray-900 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-400 mb-4" />
+        <input type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 rounded-md transition" value="Enviar"/>
+    </form>
+    </div>
+</div>
+
+<footer class="mt-10 text-sm text-gray-300">
+    Sistema integrado com Python para gestão de reciclagem
+</footer>
+</main>
+
+</body>
+{% endblock %}
